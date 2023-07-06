@@ -2,7 +2,7 @@
 
 return [
     [
-        "title"            => "Spotify-Web",
+        "title"            => "Spotify Web",
         "author"           => "Antonio D'Angelo",
         "creation_date"    => "2023-03-22",
         "last_update"      => "2023-03-27",
@@ -13,7 +13,7 @@ return [
     ],
 
     [
-        "title"            => "Campominato Dom",
+        "title"            => "Campo Minato",
         "author"           => "Antonio D'Angelo",
         "creation_date"    => "2023-04-26",
         "last_update"      => "2023-04-27",

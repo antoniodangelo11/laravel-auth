@@ -29,4 +29,12 @@ Route::middleware('auth')
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth', 'verified')
+->name('admin.')
+->prefix('admin')
+->group(function () {
+    Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
+    Route::resource('project', ProjectController::class);
+});
+
 require __DIR__.'/auth.php';

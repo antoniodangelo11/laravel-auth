@@ -1,5 +1,5 @@
 @extends('admin.layouts.base')
 
 @section('contents')
-    Benvenuto!
+    <h1 class="text-center text-light">BENVENUTO!</h1>
 @endsection

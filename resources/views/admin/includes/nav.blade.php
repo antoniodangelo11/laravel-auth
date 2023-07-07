@@ -12,9 +12,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.project.index') }}" role="button" aria-expanded="false">
                             Projects
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.project.create') }}" role="button" aria-expanded="false">
+                            Add
                         </a>
                     </li>
                 </ul>

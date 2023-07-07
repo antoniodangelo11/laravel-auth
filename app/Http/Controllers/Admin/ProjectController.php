@@ -10,12 +10,12 @@ class ProjectController extends Controller
 {
 
     private $validations = [
-        "title"            => "required|string|min:3|max:50",
+        "title"            => "required|string|max:50",
         "creation_date"    => "required|date",
         "last_update"      => "required|date",
-        "author"           => "required|string|min:3|max:30",
-        "collaborators"    => "string|min:5|max:150",
-        "description"      => "string|min:10|max:2000",
+        "author"           => "required|string|max:30",
+        "collaborators"    => "nullable|string|max:150",
+        "description"      => "nullable|string|max:2000",
         "languages"        => "required|string|max:50",
         "link_github"      => "required|string|max:150",
     ];
@@ -50,19 +50,19 @@ class ProjectController extends Controller
         // salvare i dati nel db
         $newProject = new Project();
         
-        $newProject->title = $data['title'];
+        $newProject->title         = $data['title'];
         $newProject->creation_date = $data['creation_date'];
-        $newProject->last_update = $data['last_update'];
-        $newProject->author = $data['author'];
+        $newProject->last_update   = $data['last_update'];
+        $newProject->author        = $data['author'];
         $newProject->collaborators = $data['collaborators'];
-        $newProject->description = $data['description'];
-        $newProject->languages = $data['languages'];
-        $newProject->link_github = $data['link_github'];
+        $newProject->description   = $data['description'];
+        $newProject->languages     = $data['languages'];
+        $newProject->link_github   = $data['link_github'];
 
         $newProject->save();
 
         // rotta di tipo get
-        return to_route('admin.projects.show', ['project' => $newProject]);
+        return to_route('admin.project.show', ['project' => $newProject]);
     }
 
 
@@ -86,25 +86,25 @@ class ProjectController extends Controller
         $data = $request->all();
 
         // aggiornare i dati nel db
-        $project->title = $data['title'];
+        $project->title         = $data['title'];
         $project->creation_date = $data['creation_date'];
-        $project->last_update = $data['last_update'];
-        $project->author = $data['author'];
+        $project->last_update   = $data['last_update'];
+        $project->author        = $data['author'];
         $project->collaborators = $data['collaborators'];
-        $project->description = $data['description'];
-        $project->languages = $data['languages'];
-        $project->link_github = $data['link_github'];
+        $project->description   = $data['description'];
+        $project->languages     = $data['languages'];
+        $project->link_github   = $data['link_github'];
         
         $project->update();
 
         // rotta di tipo get
-        return to_route('admin.projects.show', ['project' => $project]);
+        return to_route('admin.project.show', ['project' => $project->id]);
     }
 
     public function destroy(Project $project)
     {
         $project->delete();
 
-        return to_route('admin.projects.index')->with('delete_success', $project);
+        return to_route('admin.project.index')->with('delete_success', $project);
     }
 }

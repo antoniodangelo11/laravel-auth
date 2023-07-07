@@ -5,7 +5,15 @@
 @if (session('delete_success'))
     @php $project = session('delete_success') @endphp
     <div class="alert alert-danger">
-        The Project "{{ $project->title }}" has moved to the trash
+        The Project "{{ $project->title }}" has been permanently deleted
+    </div>
+@endif
+
+
+@if (session('restore_success'))
+    @php $project = session('restore_success') @endphp
+    <div class="alert alert-success">
+        The Project '{{ $project->title }}' has been restored
     </div>
 @endif
 
@@ -24,7 +32,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($projects as $project)
+            @foreach ($trashedProjects as $project)
                 <tr>
                     <th scope="row">{{ $project->title }}</th>
                     <td>{{ $project->author }}</td>
@@ -36,10 +44,12 @@
                     <td><a href="{{ $project->link_github }}">Link</a></td>
                     
                     <td>
-                        <a class="btn btn-primary" href="{{ route('admin.project.show', ['project' => $project->id]) }}">View</a>
-                        <a class="btn btn-warning" href="{{ route('admin.project.edit', ['project' => $project->id]) }}">Edit</a>
+                        <form class="d-inline-block" method="POST" action="{{ route('admin.project.restore', ['project' => $project->id]) }}">
+                            @csrf
+                            <button class="btn btn-warning">Restore</button>
+                        </form>
                         <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
-                        Delete
+                            Delete
                         </button>
                     </td>
                 </tr>
@@ -61,7 +71,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <form
                         action=""
-                        data-template= "{{ route('admin.project.destroy', ['project' => '***']) }}"
+                        data-template= "{{ route('admin.project.harddelete', ['project' => '***']) }}"
                         method="post"
                         class="d-inline-block"
                         id="btn-confirm-delete"
@@ -75,7 +85,7 @@
         </div>
     </div>
 
-    {{ $projects->links() }}
+    {{ $trashedProjects->links() }}
 
 @endsection
 

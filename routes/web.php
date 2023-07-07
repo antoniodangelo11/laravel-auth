@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Guests\PageController as GuestsPageController;
+use App\Models\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::middleware('auth', 'verified')
 ->prefix('admin')
 ->group(function () {
     Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
+    Route::get('project/trashed', [ProjectController::class, 'trashed'])->name('project.trashed');
+    Route::post('project/{project}/restore', [ProjectController::class, 'restore'])->name('project.restore');
+    Route::delete('project/{project}/harddelete', [ProjectController::class, 'harddelete'])->name('project.harddelete');
     Route::resource('project', ProjectController::class);
 });
 

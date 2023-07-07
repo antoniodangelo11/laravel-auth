@@ -17,7 +17,7 @@ class ProjectController extends Controller
         "collaborators"    => "nullable|string|max:150",
         "description"      => "nullable|string|max:2000",
         "languages"        => "required|string|max:50",
-        "link_github"      => "required|string|max:150",
+        "link_github"      => "required|string|url|max:150",
     ];
 
     private $validation_messages = [
@@ -106,5 +106,29 @@ class ProjectController extends Controller
         $project->delete();
 
         return to_route('admin.project.index')->with('delete_success', $project);
+    }
+
+    public function restore($id)
+    {
+        Project::withTrashed()->where('id', $id)->restore();
+
+        $project = Project::find($id);
+
+        return to_route('admin.project.trashed')->with('restore_success', $project);
+    }
+
+    public function trashed()
+    {
+        $trashedProjects = Project::onlyTrashed()->paginate(5);
+
+        return view('admin.projects.trashed', compact('trashedProjects'));
+    }
+
+    public function harddelete($id)
+    {
+        $project = Project::withTrashed()->find($id);
+        $project->forceDelete();
+
+        return to_route('admin.project.trashed')->with('delete_success', $project);
     }
 }

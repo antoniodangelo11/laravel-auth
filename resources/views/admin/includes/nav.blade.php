@@ -30,25 +30,20 @@
     <div class="d-flex justify-content-end m-3" style="width:130px">
         <div class="mx-1">
             <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
-                Profile
+                {{ ('Profile') }}
             </a>
         </div>
 
-        <div class="mx-1">
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
-            </form>
-        </div>
-        
-        {{-- <form method="POST" action="http://127.0.0.1:8000/">
-            <div class="mx-1">
-                <input type="hidden" name="_token" value="ol7QPW5TpZ36gwVPX9nsXt6peIMOMkta4B4vtb4u">
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                this.closest('form').submit();">
-                    Log Out
-                </a>
-            </div>  
-        </form> --}}
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <a  class="dropdown-item"
+                href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                this.closest('form').submit();"
+            >
+                {{ ('Log Out') }}
+            </a>
+        </form>
     </div>
 </nav>

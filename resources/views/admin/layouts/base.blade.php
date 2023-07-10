@@ -7,7 +7,7 @@
     <title>Projects Git Hub</title>
      @vite('resources/js/app.js')
 </head>
-<body class="bg-dark">
+<body>
     @include('admin.includes.header')
 
     <div class="container">

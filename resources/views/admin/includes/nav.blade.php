@@ -1,40 +1,47 @@
-<div class="container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
             <a class="navbar-brand" href="http://127.0.0.1:8000/">
                 <img src="{{ Vite::asset('../resources/img/GitHub-Mark.png') }}" alt="" width="40" height="40">
             </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.project.index') }}" role="button" aria-expanded="false">
-                            Projects
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.project.create') }}" role="button" aria-expanded="false">
-                            Add
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.project.trashed') }}" role="button" aria-expanded="false">
-                            Trash
-                        </a>
-                    </li>
-                </ul>
-                {{-- <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> --}}
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Projects
+                    </a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ route('admin.project.index') }}">List</a></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.project.create') }}">Add</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{ route('admin.project.trashed') }}">Trash</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Submit</button>
+            </form>
         </div>
-    </nav>
-</div>
+    </div>
+
+    <div class="d-flex justify-content-end m-3" style="width:130px">
+        <div class="mx-1">
+            <a class="">
+                Profile
+            </a>
+        </div>
+        
+        <form method="POST" action="http://127.0.0.1:8000/logout">
+            <div class="mx-1">
+                <input type="hidden" name="_token" value="ol7QPW5TpZ36gwVPX9nsXt6peIMOMkta4B4vtb4u">
+                <a class="" href="http://127.0.0.1:8000/logout" onclick="event.preventDefault();
+                this.closest('form').submit();">
+                Log Out
+                </a>
+            </div>  
+        </form>
+    </div>
+</nav>

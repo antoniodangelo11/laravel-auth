@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-            <a class="navbar-brand" href="http://127.0.0.1:8000/">
-                <img src="{{ Vite::asset('../resources/img/GitHub-Mark.png') }}" alt="" width="40" height="40">
-            </a>
+        <a class="navbar-brand" href="http://127.0.0.1:8000/">
+            <img src="{{ Vite::asset('../resources/img/GitHub-Mark.png') }}" alt="" width="40" height="40">
+        </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -29,19 +29,26 @@
 
     <div class="d-flex justify-content-end m-3" style="width:130px">
         <div class="mx-1">
-            <a class="">
+            <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
                 Profile
             </a>
         </div>
+
+        <div class="mx-1">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>
+            </form>
+        </div>
         
-        <form method="POST" action="http://127.0.0.1:8000/logout">
+        {{-- <form method="POST" action="http://127.0.0.1:8000/">
             <div class="mx-1">
                 <input type="hidden" name="_token" value="ol7QPW5TpZ36gwVPX9nsXt6peIMOMkta4B4vtb4u">
-                <a class="" href="http://127.0.0.1:8000/logout" onclick="event.preventDefault();
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                 this.closest('form').submit();">
-                Log Out
+                    Log Out
                 </a>
             </div>  
-        </form>
+        </form> --}}
     </div>
 </nav>
